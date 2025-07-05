@@ -42,8 +42,20 @@ Srting cnFile=convertToString(prFile);
 List<map<String,String>> header=cnFile.subString(0,cnFile.indexOf("/n"));//0 starting index and last index not including
 List<String> headerList=Array.straem(header).map(String::trim).collect(Collectors.toList());//Trim the header line of whitespaces ans empty strings
 
-List<map<String,String>> content=removeExtraLine(cnFile)
-if(header.size()==content.size()){}
+Aray content=removeExtraLine(cnFile)
+
+List<Map<String,String>> readyData = new HashMap();
+for(words:content.split('\t')){
+  List a = new LinkedHashMap()
+
+if(header.size()!=content.size()){
+  new SapphireException('No. of column and headers and  not matching')
+}else{
+  for(i=0;i<=header.size;i++){
+     a.put(header(i),words(i))
+  }
+  readyData.add(a);
+}
 
 }
 
