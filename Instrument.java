@@ -8,8 +8,9 @@ import sapphire.util.StringUtil
 import sapphire.util.Array
 
 import java.io.InputStream
+import java.io.InputStreamReader
 import java.io.BufferReader
-import java.io.
+import java.io.straem.Collectors
 
 public static Instrment extends BaseAttachmentHandler 
 
@@ -30,5 +31,21 @@ try {
 catch{
   sapphireException('Input file cauld not be parsed')
 }
+}
+
+public static void parseFile(Attachment input) throws SapphireException {
+//1.Identify the header
+Stream prFile=InputStream(input);
+Srting cnFile=convertToString(prFile);
+List<map<String,String>> grFile=prFile.straem().
+}
+
+public static void convertToString(InputStream input){
+ try(BufferReader bf=new BufferReader(new InputStreamReader(input))) {
+ return bf.lines().collect(Collectors.joining("\n"));
+ } catch (SapphireException e){
+  throw new SapphireException("Input file can't be read",e);
+ }
+
 }
 }
