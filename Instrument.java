@@ -45,10 +45,11 @@ List<String> headerList=Array.straem(header).map(String::trim).collect(Collector
 Aray content=removeExtraLine(cnFile)
 
 List<Map<String,String>> readyData = new HashMap();
-for(words:content.split('\t')){
+for(lines:content.split('\n')){
+  List<String> words = Arrays.asList(lines.split('\t',-1))
   List a = new LinkedHashMap()
 
-if(header.size()!=content.size()){
+if(header.size()!=words.size()){
   new SapphireException('No. of column and headers and  not matching')
 }else{
   for(i=0;i<=header.size;i++){
@@ -56,6 +57,7 @@ if(header.size()!=content.size()){
   }
   readyData.add(a);
 }
+readyData.straem().filter(condition->readyData.get('Sample id').startsWith('S-'))//Ensuring the rows that only start with Sample ids.
 
 }
 
@@ -75,4 +77,50 @@ public static String removeExtraLine(String ex){
   .collect(Collectors.toList())
 
 }
+}
+
+public void storeInLV(List<Map<String,String>> results) {
+  List<sTRING> uniqueSampleIds=Arrays.stream(results).distinct().collect(Collectors.toList());
+  List<String> uniqueMethodIds=Arrays.stream(results).distinct().collect(Collectors.toList());
+
+  DataSet sampleIds=sampleDetails(results);
+  DataSet methodsIds=methodDetails(results);
+ 
+}
+
+public Dataset sampleDetails(List<Map<>>){
+  //Write your sql query to filter unique samples and return them in a dataset
+}
+
+public Dataset methodDetails(List<Map<>>){
+  //Write your sql query to filter unique samples and return them in a dataset
+}
+
+for (String sample:uniqueSampleIds) {
+  PropertyList dataPops=new PropertyList();
+
+  for(String methodId:methodsIds){
+    ArrayList dataset=new arrayList();
+    ArrayList paramids=new ArrayList();
+    ArrayList enteredText=new ArrayList();
+
+
+    
+      List<Map<>> sampleData=results.stream()
+      .filter(row->row.get(Sample_id).equals(sample))
+      .filter(row->row.get(Method).equals(methodId))
+      .collect(Collectors.toList())
+
+      for (Map<String,String> eachMap:results){
+        paramids.add(LV.ANALYTE)
+        enteredText.add(eachMap.get(Reported.analyte));
+        
+ }
+ dataPops.setproperty("paramids",paramids)
+ dataPops.setproperty("enteredtext",enteredText)
+
+  }
+  getActionProcessor.ProcessAction(EnterDataSet.id,EnterDataSet.version,dataPops)
+
+
 }
